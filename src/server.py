@@ -2,9 +2,9 @@ from flask import Flask
 from flask.blueprints import Blueprint
 from flask_migrate import Migrate, MigrateCommand
 
-import config
-from models import db, ma
-import routes
+from .config import config
+from .models import db, ma
+from .routes import routes
 
 # config your API specs
 # you can define multiple specs in the case your api has multiple versions
@@ -31,4 +31,4 @@ for blueprint in vars(routes).values():
         )
 
 if __name__ == '__main__':
-  server.run(host=config.HOST, port=config.PORT)
+    server.run(host=config.HOST, port=config.PORT)

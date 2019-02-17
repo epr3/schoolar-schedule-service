@@ -27,13 +27,6 @@ class Event(db.Model):
         self.subject_id = subject_id
 
 
-class EventSchema(ma.Schema):
-    id = fields.String()
-    room = fields.String(required=True)
-    rrule = fields.String(required=True)
-    start_date = fields.DateTime(required=True)
-    end_date = fields.DateTime(required=True)
-    is_notifiable = fields.Boolean()
-    subject_id = fields.String(required=True)
-    group_id = fields.String(required=True)
-    professor_id = fields.String(required=True)
+class EventSchema(ma.ModelSchema):
+    class Meta:
+        model = Event
