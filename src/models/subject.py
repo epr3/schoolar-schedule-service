@@ -1,5 +1,4 @@
 from . import db, ma
-from marshmallow import Schema, fields
 from uuid import uuid4
 
 
@@ -11,7 +10,7 @@ class Subject(db.Model):
     faculty_id = db.Column(db.String, db.ForeignKey(
         'faculties.id', ondelete='CASCADE'), nullable=False)
     faculty = db.relationship(
-        'Faculty', backref=db.backref('faculties', lazy='dynamic'))
+        'Faculty', backref=db.backref('subject_faculties', lazy='dynamic'), foreign_keys=[faculty_id])
 
     def __init__(self, subject, faculty_id):
         self.subject = subject

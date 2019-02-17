@@ -1,5 +1,4 @@
 from . import db, ma
-from marshmallow import Schema, fields
 from uuid import uuid4
 
 
@@ -14,11 +13,11 @@ class Event(db.Model):
     subject_id = db.Column(db.String, db.ForeignKey(
         'subjects.id', ondelete='CASCADE'), nullable=False)
     subject = db.relationship(
-        'Subject', backref=db.backref('subjects', lazy='dynamic'))
+        'Subject', backref=db.backref('event_subjects', lazy='dynamic'), foreign_keys=[subject_id])
     group_id = db.Column(db.String, db.ForeignKey(
         'groups.id', ondelete='CASCADE'), nullable=False)
     group = db.relationship(
-        'Group', backref=db.backref('groups', lazy='dynamic'))
+        'Group', backref=db.backref('event_groups', lazy='dynamic'), foreign_keys=[group_id])
     professor_id = db.Column(db.String, nullable=False)
 
     def __init__(self, event, group_id, subject_id):

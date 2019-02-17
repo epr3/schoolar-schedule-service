@@ -2,9 +2,9 @@ from flask import Flask
 from flask.blueprints import Blueprint
 from flask_migrate import Migrate, MigrateCommand
 
-from .config import config
-from .models import db, ma
-from .routes import routes
+import config
+from models import db, ma
+import routes
 
 # config your API specs
 # you can define multiple specs in the case your api has multiple versions

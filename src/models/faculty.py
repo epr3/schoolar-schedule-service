@@ -1,5 +1,4 @@
 from . import db, ma
-from marshmallow import Schema, fields
 from uuid import uuid4
 
 
