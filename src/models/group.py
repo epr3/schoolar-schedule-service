@@ -1,8 +1,9 @@
 from . import db, ma
+from .abstract import BaseModel, MetaBaseModel
 from uuid import uuid4
 
 
-class Group(db.Model):
+class Group(db.Model, BaseModel, metaclass=MetaBaseModel):
     __tablename__ = 'groups'
     id = db.Column(db.String, primary_key=True, default=uuid4)
     number = db.Column(db.String, nullable=False)

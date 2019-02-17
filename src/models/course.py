@@ -1,8 +1,9 @@
 from . import db, ma
+from .abstract import BaseModel, MetaBaseModel
 from uuid import uuid4
 
 
-class Course(db.Model):
+class Course(db.Model, BaseModel, metaclass=MetaBaseModel):
     __tablename__ = 'courses'
     id = db.Column(db.String, primary_key=True, default=uuid4)
     course_path = db.Column(db.String, nullable=False)

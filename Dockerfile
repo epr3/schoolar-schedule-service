@@ -6,4 +6,4 @@ ADD . .
 
 RUN pip install -r requirements.txt
 
-CMD ["flask", "run"]
+CMD ["python", "src/server.py"]

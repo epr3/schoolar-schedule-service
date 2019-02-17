@@ -1,8 +1,9 @@
 from . import db, ma
+from .abstract import BaseModel, MetaBaseModel
 from uuid import uuid4
 
 
-class Event(db.Model):
+class Event(db.Model, BaseModel, metaclass=MetaBaseModel):
     __tablename__ = 'events'
     id = db.Column(db.String, primary_key=True, default=uuid4)
     room = db.Column(db.String, nullable=False)

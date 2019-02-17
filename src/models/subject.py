@@ -1,8 +1,9 @@
 from . import db, ma
+from .abstract import BaseModel, MetaBaseModel
 from uuid import uuid4
 
 
-class Subject(db.Model):
+class Subject(db.Model, BaseModel, metaclass=MetaBaseModel):
     __tablename__ = 'subjects'
     id = db.Column(db.String, primary_key=True, default=uuid4)
     name = db.Column(db.String, nullable=False)

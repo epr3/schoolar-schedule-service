@@ -14,7 +14,6 @@ import routes
 
 server = Flask(__name__)
 
-server.debug = config.DEBUG
 server.config['SQLALCHEMY_DATABASE_URI'] = config.DB_URI
 db.init_app(server)
 ma.init_app(server)
@@ -26,9 +25,13 @@ migrate = Migrate(server, db)
 for blueprint in vars(routes).values():
     if isinstance(blueprint, Blueprint):
         server.register_blueprint(
-            blueprint,
-            url_prefix=config.APPLICATION_ROOT
+            blueprint
         )
 
+
+@server.route('/')
+def hello_world():
+    return 'Hello, World!'
+
 if __name__ == '__main__':
-    server.run(host=config.HOST, port=config.PORT)
+    server.run(host='0.0.0.0', port=3000, debug=True)
