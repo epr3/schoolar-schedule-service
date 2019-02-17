@@ -18,8 +18,6 @@ class Group(db.Model):
         self.faculty_id = faculty_id
 
 
-class GroupSchema(ma.Schema):
-    id = fields.String()
-    number = fields.String(required=True)
-    year = fields.String(required=True)
-    faculty_id = fields.String(required=True)
+class GroupSchema(ma.ModelSchema):
+    class Meta:
+        model = Group

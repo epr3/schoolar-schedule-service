@@ -12,6 +12,6 @@ class Faculty(db.Model):
         self.faculty = faculty
 
 
-class FacultySchema(ma.Schema):
-    id = fields.String()
-    name = fields.String(required=True)
+class FacultySchema(ma.ModelSchema):
+    class Meta:
+        model = Faculty

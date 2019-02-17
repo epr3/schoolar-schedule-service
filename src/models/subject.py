@@ -18,8 +18,6 @@ class Subject(db.Model):
         self.faculty_id = faculty_id
 
 
-class SubjectSchema(ma.Schema):
-    id = fields.String()
-    name = fields.String(required=True)
-    credits = fields.String(required=True)
-    faculty_id = fields.String(required=True)
+class SubjectSchema(ma.ModelSchema):
+    class Meta:
+        model = Subject
