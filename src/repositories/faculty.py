@@ -1,6 +1,8 @@
+from flask import jsonify
 from models import Faculty, FacultySchema
 
 faculty_schema = FacultySchema()
+faculties_schema = FacultySchema(many=True)
 
 
 class FacultyRepository:
@@ -10,7 +12,8 @@ class FacultyRepository:
 
   @staticmethod
   def get_all():
-    return faculty_schema.jsonify(Faculty.query.all())
+    result = faculties_schema.dump(Faculty.query.all())
+    return jsonify(result.data)
 
   def update(id, **kwargs):
     faculty = Faculty.query.get(id)

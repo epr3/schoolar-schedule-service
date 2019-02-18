@@ -5,7 +5,7 @@ from uuid import uuid4
 
 class Event(db.Model, BaseModel, metaclass=MetaBaseModel):
     __tablename__ = 'events'
-    id = db.Column(db.String, primary_key=True, default=uuid4)
+    id = db.Column(db.String, primary_key=True, default=str(uuid4()))
     room = db.Column(db.String, nullable=False)
     rrule = db.Column(db.String, nullable=False)
     start_date = db.Column(db.DateTime, nullable=False)
@@ -20,11 +20,6 @@ class Event(db.Model, BaseModel, metaclass=MetaBaseModel):
     group = db.relationship(
         'Group', backref=db.backref('event_groups', lazy='dynamic'), foreign_keys=[group_id])
     professor_id = db.Column(db.String, nullable=False)
-
-    def __init__(self, event, group_id, subject_id):
-        self.event = event
-        self.group_id = group_id
-        self.subject_id = subject_id
 
 
 class EventSchema(ma.ModelSchema):
