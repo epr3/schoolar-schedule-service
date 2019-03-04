@@ -3,7 +3,7 @@ from flask.blueprints import Blueprint
 from flask_migrate import Migrate, MigrateCommand
 
 import config
-from models import db, ma
+from models import db
 import routes
 
 # config your API specs
@@ -16,9 +16,7 @@ server = Flask(__name__)
 
 server.config['SQLALCHEMY_DATABASE_URI'] = config.DB_URI
 db.init_app(server)
-ma.init_app(server)
 db.app = server
-ma.app = server
 
 migrate = Migrate(server, db)
 

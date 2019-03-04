@@ -1,4 +1,5 @@
-from . import db, ma
+from marshmallow import Schema, fields
+from . import db, SubjectSchema, GroupSchema
 from .abstract import BaseModel, MetaBaseModel
 from uuid import uuid4
 
@@ -22,6 +23,13 @@ class Event(db.Model, BaseModel, metaclass=MetaBaseModel):
     professor_id = db.Column(db.String, nullable=False)
 
 
-class EventSchema(ma.ModelSchema):
-    class Meta:
-        model = Event
+class EventSchema(Schema):
+    id = fields.Str(dump_only=True)
+    room = fields.Str(required=True)
+    rrule = fields.Str(required=True)
+    start_date = fields.DateTime(required=True)
+    end_date = fields.DateTime(required=True)
+    is_notifiable = fields.Bool()
+    subject = fields.Nested(SubjectSchema)
+    group = fields.Nested(GroupSchema)
+

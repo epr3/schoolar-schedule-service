@@ -1,24 +1,24 @@
-from flask import jsonify
-from models import Subject, SubjectSchema
-
-subject_schema = SubjectSchema()
-subjects_schema = SubjectSchema(many=True)
+from flask import abort
+from models import Subject
+from sqlalchemy.exc import IntegrityError
 
 
 class SubjectRepository:
   @staticmethod
   def get(id):
-    return subject_schema.jsonify(Subject.query.get(id))
+    try:
+      return Subject.query.get(id)
+    except IntegrityError:
+      abort(404, 'Subject not found')
 
   @staticmethod
   def get_all():
-    result = subjects_schema.dump(Subject.query.all())
-    return jsonify(result.data)
+    return Subject.query.all()
 
   def update(id, **kwargs):
     subject = Subject.query.get(id)
     subject.update(**kwargs)
-    return subject_schema.jsonify(subject.save())
+    return subject.save()
 
   def delete(id):
     subject = Subject.query.get(id)
@@ -27,4 +27,4 @@ class SubjectRepository:
   @staticmethod
   def create(**kwargs):
     subject = Subject(**kwargs)
-    return subject_schema.jsonify(subject.save())
+    return subject.save()

@@ -1,4 +1,5 @@
-from . import db, ma
+from marshmallow import Schema, fields
+from . import db
 from .abstract import BaseModel, MetaBaseModel
 from uuid import uuid4
 
@@ -9,6 +10,6 @@ class Faculty(db.Model, BaseModel, metaclass=MetaBaseModel):
     name = db.Column(db.String, nullable=False)
 
 
-class FacultySchema(ma.ModelSchema):
-    class Meta:
-        model = Faculty
+class FacultySchema(Schema):
+    id = fields.Str(dump_only=True)
+    name = fields.Str(required=True)

@@ -1,4 +1,5 @@
-from . import db, ma
+from marshmallow import Schema, fields
+from . import db, SubjectSchema
 from .abstract import BaseModel, MetaBaseModel
 from uuid import uuid4
 
@@ -13,6 +14,7 @@ class Course(db.Model, BaseModel, metaclass=MetaBaseModel):
         'Subject', backref=db.backref('course_subjects', lazy='dynamic'), foreign_keys=[subject_id])
     professor_id = db.Column(db.String, nullable=False)
 
-class CourseSchema(ma.ModelSchema):
-    class Meta:
-        model = Course
+class CourseSchema(Schema):
+    id = fields.Str(dump_only=True)
+    course_path = fields.Str(required=True)
+    subject = fields.Nested(SubjectSchema)

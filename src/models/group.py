@@ -1,4 +1,5 @@
-from . import db, ma
+from marshmallow import Schema, fields
+from . import db, FacultySchema
 from .abstract import BaseModel, MetaBaseModel
 from uuid import uuid4
 
@@ -14,6 +15,8 @@ class Group(db.Model, BaseModel, metaclass=MetaBaseModel):
         'Faculty', backref=db.backref('group_faculties', lazy='dynamic'), foreign_keys=[faculty_id])
 
 
-class GroupSchema(ma.ModelSchema):
-    class Meta:
-        model = Group
+class GroupSchema(Schema):
+    id = fields.Str(dump_only=True)
+    number = fields.Str(required=True)
+    year = fields.Str(required=True)
+    faculty = fields.Nested(FacultySchema)
