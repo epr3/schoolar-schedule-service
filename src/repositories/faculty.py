@@ -1,15 +1,10 @@
-from flask import abort
 from models import Faculty
-from sqlalchemy.exc import IntegrityError
 
 
 class FacultyRepository:
   @staticmethod
   def get(id):
-      try:
-        return Faculty.query.get(id)
-      except IntegrityError:
-        abort(404, 'Faculty not found')
+    return Faculty.query.get_or_404(id)
 
   @staticmethod
   def get_all():

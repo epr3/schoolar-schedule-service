@@ -66,6 +66,11 @@ class BaseModel():
         db.session.commit()
         return self
 
+    def update(self, **kwargs):
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+        return self
+
     def delete(self):
         db.session.delete(self)
         db.session.commit()
