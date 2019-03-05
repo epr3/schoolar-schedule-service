@@ -13,6 +13,8 @@ PORT = int(os.environ.get('APPLICATION_PORT', '3000'))
 # DB_CONTAINER = os.getenv('APPLICATION_DB_CONTAINER', 'db')
 DB_URI = os.environ.get('APPLICATION_DB') or \
     'sqlite:///' + os.path.join(basedir, 'app.db')
+DB_URI_MIGRATION = os.environ.get('MIGRATION_DB') or \
+    'sqlite:///' + os.path.join(basedir, 'app.db')
 
 # logging.basicConfig(
 #     filename=os.getenv('SERVICE_LOG', 'server.log'),
