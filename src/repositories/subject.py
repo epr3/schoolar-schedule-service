@@ -1,15 +1,10 @@
-from flask import abort
 from models import Subject
-from sqlalchemy.exc import IntegrityError
 
 
 class SubjectRepository:
   @staticmethod
   def get(id):
-    try:
-      return Subject.query.get(id)
-    except IntegrityError:
-      abort(404, 'Subject not found')
+    return Subject.query.get_or_404(id)
 
   @staticmethod
   def get_all():

@@ -1,14 +1,9 @@
-from flask import abort
 from models import Group
-from sqlalchemy.exc import IntegrityError
 
 class GroupRepository:
   @staticmethod
   def get(id):
-    try:
-      return Group.query.get(id)
-    except IntegrityError:
-      abort(404, 'Group not found')
+    return Group.query.get_or_404(id)
 
   @staticmethod
   def get_all():

@@ -11,6 +11,7 @@ class Event(db.Model, BaseModel, metaclass=MetaBaseModel):
     rrule = db.Column(db.String, nullable=False)
     start_date = db.Column(db.DateTime, nullable=False)
     end_date = db.Column(db.DateTime, nullable=False)
+    is_full_day = db.Column(db.Boolean, default=False)
     is_notifiable = db.Column(db.Boolean, default=False)
     subject_id = db.Column(db.String, db.ForeignKey(
         'subjects.id', ondelete='CASCADE'), nullable=False)
@@ -29,6 +30,7 @@ class EventSchema(Schema):
     rrule = fields.Str(required=True)
     start_date = fields.DateTime(required=True)
     end_date = fields.DateTime(required=True)
+    is_full_day = fields.Bool()
     is_notifiable = fields.Bool()
     subject = fields.Nested(SubjectSchema)
     group = fields.Nested(GroupSchema)
