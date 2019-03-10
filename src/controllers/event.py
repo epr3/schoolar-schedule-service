@@ -1,6 +1,7 @@
 from flask import request
 from flask_restful import Resource
 from marshmallow import ValidationError
+from dateutil.rrule import rrule, WEEKLY, DAILY
 
 from repositories import EventRepository
 from models import EventSchema
@@ -36,4 +37,6 @@ class EventListResource(Resource):
 
   def get(self):
     # TODO: parse query params here and return list of events
-    return events_schema.dump(EventRepository.get_all())
+    events = EventRepository.get_all(**request.args)
+    print(WEEKLY, DAILY)
+    return events_schema.dump(events)

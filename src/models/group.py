@@ -19,4 +19,5 @@ class GroupSchema(Schema):
     id = fields.Str(dump_only=True)
     number = fields.Str(required=True)
     year = fields.Str(required=True)
+    faculty_id = fields.Str(required=True, load_only=True)
     faculty = fields.Nested(FacultySchema)

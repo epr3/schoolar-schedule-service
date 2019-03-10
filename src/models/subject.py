@@ -19,4 +19,5 @@ class SubjectSchema(Schema):
     id = fields.Str(dump_only=True)
     name = fields.Str(required=True)
     credits = fields.Int(required=True)
+    faculty_id = fields.Str(required=True, load_only=True)
     faculty = fields.Nested(FacultySchema)

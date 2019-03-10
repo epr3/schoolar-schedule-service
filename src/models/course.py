@@ -17,4 +17,6 @@ class Course(db.Model, BaseModel, metaclass=MetaBaseModel):
 class CourseSchema(Schema):
     id = fields.Str(dump_only=True)
     course_path = fields.Str(required=True)
+    subject_id = fields.Str(required=True, load_only=True)
+    professor_id = fields.Str(required=True, load_only=True)
     subject = fields.Nested(SubjectSchema)
