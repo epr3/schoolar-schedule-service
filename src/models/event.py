@@ -12,6 +12,7 @@ class Event(db.Model, BaseModel, metaclass=MetaBaseModel):
     frequency = db.Column(db.String, nullable=False)
     start_date = db.Column(db.DateTime, nullable=False)
     end_date = db.Column(db.DateTime, nullable=False)
+    duration = db.Column(db.Integer, nullable=False)
     is_full_day = db.Column(db.Boolean, default=False)
     is_notifiable = db.Column(db.Boolean, default=False)
     subject_id = db.Column(db.String, db.ForeignKey(
@@ -32,6 +33,7 @@ class EventSchema(Schema):
     frequency = fields.Str(required=True)
     start_date = fields.DateTime(required=True)
     end_date = fields.DateTime(required=True)
+    duration = fields.Integer(required=True)
     is_full_day = fields.Bool()
     is_notifiable = fields.Bool()
     subject_id = fields.Str(required=True, load_only=True)

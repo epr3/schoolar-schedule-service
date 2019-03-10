@@ -1,3 +1,6 @@
+from datetime import datetime
+from dateutil import parser
+from pytz import UTC
 from flask import request
 from flask_restful import Resource
 from marshmallow import ValidationError
@@ -36,7 +39,16 @@ class EventListResource(Resource):
     return event_schema.dump(EventRepository.create(**data))
 
   def get(self):
-    # TODO: parse query params here and return list of events
-    events = EventRepository.get_all(**request.args)
-    print(WEEKLY, DAILY)
-    return events_schema.dump(events)
+    events = events_schema.dump(EventRepository.get_all(**request.args))
+    if request.args.get('start_date'):
+      start = parser.parse(request.args.get('start_date'))
+    if request.args.get('end_date'):
+      end = parser.parse(request.args.get('end_date'))
+    if start and end:
+      event_list = [{
+        **event,
+        'dates': [datetime.strftime(item, '%Y-%m-%d %H:%M:%S') for item in list(rrule(WEEKLY if event['frequency'] == 'WEEKLY' else DAILY, dtstart=parser.parse(event['start_date']), until=parser.parse(event['end_date']), interval=event['interval'])) if item >= UTC.localize(start) and item <= UTC.localize(end)]} for event in events]
+
+      return event_list
+
+    return events

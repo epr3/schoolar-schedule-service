@@ -16,9 +16,9 @@ class EventRepository:
     professor_id = kwargs.get('professor_id', None)
 
     if start_date is not None and is_valid_date(start_date):
-      events = events.filter(Event.start_date <= start_date)
+      events = events.filter(Event.end_date >= start_date)
     if end_date is not None and is_valid_date(end_date):
-      events = events.filter(Event.end_date >= end_date)
+      events = events.filter(Event.start_date <= end_date)
     if group_id is not None:
       events = events.filter(group_id=group_id)
     if professor_id is not None:
