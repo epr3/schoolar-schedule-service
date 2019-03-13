@@ -1,17 +1,14 @@
+import json
+import config
+from flask import current_app
 from flask_script import Command
-from seeder import ResolvingSeeder
-from models import db
+from repositories import FacultyRepository
 
 class Seeder(Command):
   def run(self):
-    seeder = ResolvingSeeder(db.session)
-    #course_entities = seeder.load_entities_from_yaml_file(
-    #'./course.yaml', commit=True)
-    faculty_entities = seeder.load_entities_from_yaml_file(
-    './src/fixtures/faculty.yaml', commit=True)
-    #group_entities = seeder.load_entities_from_yaml_file(
-    #'./group.yaml', commit=True)
-    #subject_entities = seeder.load_entities_from_yaml_file(
-    #'./subject.yaml', commit=True)
-    #event_entitities = seeder.load_entities_from_yaml_file(
-    #'./event.yaml', commit=True)
+    current_app.config['SQLALCHEMY_DATABASE_URI'] = config.DB_URI
+    with open('./src/fixtures/faculty.json') as f:
+      data = json.load(f)
+
+    for item in data:
+      FacultyRepository.create(**item)

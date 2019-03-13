@@ -1,5 +1,0 @@
-target_class: src.models:Faculty
-data:
-  -name: 'Test1'
-  -name: 'Test2'
-  -name: 'Test3'
