@@ -2,8 +2,8 @@ from flask import request
 from flask_restful import Resource
 from marshmallow import ValidationError
 
-from repositories import SubjectRepository
-from models import SubjectSchema
+from src.repositories import SubjectRepository
+from src.models import SubjectSchema
 
 subject_schema = SubjectSchema()
 subjects_schema = SubjectSchema(many=True)

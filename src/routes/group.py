@@ -1,7 +1,7 @@
 from flask import Blueprint
 from flask_restful import Api
 
-from controllers import GroupResource, GroupListResource
+from src.controllers import GroupResource, GroupListResource
 
 
 GROUP_BLUEPRINT = Blueprint('group', __name__)

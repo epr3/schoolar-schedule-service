@@ -1,7 +1,7 @@
 from flask import Blueprint
 from flask_restful import Api
 
-from controllers import SubjectResource, SubjectListResource
+from src.controllers import SubjectResource, SubjectListResource
 
 
 SUBJECT_BLUEPRINT = Blueprint('subject', __name__)

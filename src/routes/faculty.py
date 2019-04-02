@@ -1,7 +1,7 @@
 from flask import Blueprint
 from flask_restful import Api
 
-from controllers import FacultyResource, FacultyListResource
+from src.controllers import FacultyResource, FacultyListResource
 
 
 FACULTY_BLUEPRINT = Blueprint('faculty', __name__)

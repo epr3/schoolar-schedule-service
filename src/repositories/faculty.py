@@ -1,4 +1,4 @@
-from models import Faculty
+from src.models import Faculty
 
 
 class FacultyRepository:

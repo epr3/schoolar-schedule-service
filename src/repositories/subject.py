@@ -1,4 +1,4 @@
-from models import Subject
+from src.models import Subject
 
 
 class SubjectRepository:

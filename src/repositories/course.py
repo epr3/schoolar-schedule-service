@@ -1,4 +1,4 @@
-from models import Course
+from src.models import Course
 
 
 class CourseRepository:

@@ -1,4 +1,4 @@
-from models import Group
+from src.models import Group
 
 class GroupRepository:
   @staticmethod

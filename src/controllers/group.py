@@ -2,8 +2,8 @@ from flask import request
 from flask_restful import Resource
 from marshmallow import ValidationError
 
-from repositories import GroupRepository
-from models import GroupSchema
+from src.repositories import GroupRepository
+from src.models import GroupSchema
 
 group_schema = GroupSchema()
 groups_schema = GroupSchema(many=True)

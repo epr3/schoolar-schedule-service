@@ -2,8 +2,8 @@ from flask import request
 from flask_restful import Resource
 from marshmallow import ValidationError
 
-from repositories import CourseRepository
-from models import CourseSchema
+from src.repositories import CourseRepository
+from src.models import CourseSchema
 
 course_schema = CourseSchema()
 courses_schema = CourseSchema(many=True)

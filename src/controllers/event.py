@@ -6,10 +6,10 @@ from flask_restful import Resource
 from marshmallow import ValidationError
 from dateutil.rrule import rrule, WEEKLY, DAILY
 
-from repositories import EventRepository
-from models import EventSchema
+from src.repositories import EventRepository
+from src.models import EventSchema
 
-from util import exclude_keys
+from src.util import exclude_keys
 
 event_schema = EventSchema()
 events_schema = EventSchema(many=True)

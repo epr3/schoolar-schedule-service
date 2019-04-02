@@ -1,7 +1,7 @@
 from flask import Blueprint
 from flask_restful import Api
 
-from controllers import EventResource, EventListResource
+from src.controllers import EventResource, EventListResource
 
 
 EVENT_BLUEPRINT = Blueprint('event', __name__)

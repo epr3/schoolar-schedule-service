@@ -1,5 +1,5 @@
-from models import Event
-from util import is_valid_date
+from src.models import Event
+from src.util import is_valid_date
 
 
 class EventRepository:

@@ -1,8 +1,8 @@
 import json
-import config
+from src import config
 from flask import current_app
 from flask_script import Command
-from repositories import FacultyRepository
+from src.repositories import FacultyRepository
 
 class Seeder(Command):
   def run(self):
