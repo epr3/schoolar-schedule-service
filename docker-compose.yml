@@ -10,8 +10,8 @@ services:
     ports:
       - "6000:3000"
 
-# networks:
-#   default:
-#     external:
-#       name: schoolar-network
+networks:
+  default:
+    external:
+      name: schoolar-network
 
