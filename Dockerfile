@@ -11,6 +11,3 @@ RUN pipenv install --pre -r requirements.txt
 ADD . .
 
 RUN pipenv run python manage.py db upgrade
-
-RUN pipenv install gunicorn
-

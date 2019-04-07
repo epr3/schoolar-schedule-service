@@ -1,6 +1,7 @@
 from flask import request
 from flask_restful import Resource
 from marshmallow import ValidationError
+from flask_jwt_extended import jwt_required
 
 from src.repositories import FacultyRepository
 from src.models import FacultySchema
@@ -32,5 +33,6 @@ class FacultyListResource(Resource):
       return err.messages, 422
     return faculty_schema.dump(FacultyRepository.create(**data))
 
+  @jwt_required
   def get(self):
     return faculties_schema.dump(FacultyRepository.get_all())

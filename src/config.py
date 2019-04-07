@@ -10,6 +10,8 @@ APPLICATION_ROOT = os.environ.get('APPLICATION_ROOT', '/application')
 HOST = os.environ.get('APPLICATION_HOST')
 PORT = int(os.environ.get('APPLICATION_PORT', '3000'))
 
+JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
+
 # DB_CONTAINER = os.getenv('APPLICATION_DB_CONTAINER', 'db')
 DB_URI = os.environ.get('APPLICATION_DB') or \
     'sqlite:///' + os.path.join(basedir, 'app.db')

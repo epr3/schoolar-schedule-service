@@ -1,17 +1,17 @@
 from flask import Blueprint
-from flask_restful import Api
+from src.util import SchoolarApi
 
 from src.controllers import EventResource, EventListResource
 
 
 EVENT_BLUEPRINT = Blueprint('event', __name__)
 
-Api(EVENT_BLUEPRINT).add_resource(
+SchoolarApi(EVENT_BLUEPRINT).add_resource(
     EventListResource,
     '/events'
 )
 
-Api(EVENT_BLUEPRINT).add_resource(
+SchoolarApi(EVENT_BLUEPRINT).add_resource(
     EventResource,
     '/events/<string:id>'
 )

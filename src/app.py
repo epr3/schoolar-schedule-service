@@ -1,6 +1,6 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask.blueprints import Blueprint
-from flask_migrate import Migrate, MigrateCommand
+from flask_jwt_extended import JWTManager
 
 from . import config
 from . import routes
@@ -15,10 +15,17 @@ from src.models import db
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = config.DB_URI
+app.config['JWT_HEADER_TYPE'] = 'JWT'
+app.config['JWT_IDENTITY_CLAIM'] = 'sub'
+app.config['JWT_SECRET_KEY'] = config.JWT_SECRET_KEY
 db.init_app(app)
 db.app = app
 
-migrate = Migrate(app, db)
+jwt = JWTManager(app)
+
+@jwt.unauthorized_loader
+def unauthorized_callback(reason):
+    return 'Unauthorized', 401
 
 for blueprint in vars(routes).values():
     if isinstance(blueprint, Blueprint):
