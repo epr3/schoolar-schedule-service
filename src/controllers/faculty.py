@@ -5,6 +5,7 @@ from flask_jwt_extended import jwt_required
 
 from src.repositories import FacultyRepository
 from src.models import FacultySchema
+from src.util import roles_required
 
 faculty_schema = FacultySchema()
 faculties_schema = FacultySchema(many=True)
@@ -34,5 +35,6 @@ class FacultyListResource(Resource):
     return faculty_schema.dump(FacultyRepository.create(**data))
 
   @jwt_required
+  @roles_required(['ADMIN', 'STUDENT'])
   def get(self):
     return faculties_schema.dump(FacultyRepository.get_all())
