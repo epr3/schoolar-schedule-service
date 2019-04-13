@@ -1,4 +1,6 @@
+import click
 from flask import Flask, jsonify
+from flask_migrate import Migrate
 from flask.blueprints import Blueprint
 from flask_jwt_extended import JWTManager
 
@@ -21,6 +23,8 @@ app.config['JWT_SECRET_KEY'] = config.JWT_SECRET_KEY
 db.init_app(app)
 db.app = app
 
+migrate = Migrate(app, db)
+
 jwt = JWTManager(app)
 
 @jwt.unauthorized_loader
@@ -37,6 +41,11 @@ for blueprint in vars(routes).values():
 @app.route('/healthz')
 def healthz():
     return 'OK!'
+
+
+@app.cli.command()
+def test_command():
+    click.echo('Test')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)

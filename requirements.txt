@@ -5,11 +5,9 @@ attrs==18.2.0
 autopep8==1.4.3
 Click==7.0
 Flask==1.0.2
-Flask-Fixtures==0.3.8
 Flask-JWT-Extended==3.18.0
 Flask-Migrate==2.4.0
 Flask-RESTful==0.3.7
-Flask-Script==2.0.6
 Flask-SQLAlchemy==2.3.2
 gunicorn==19.9.0
 itsdangerous==1.1.0
