@@ -17,7 +17,6 @@ from src.models import db
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = config.DB_URI
-print(config.DB_URI)
 app.config['JWT_HEADER_TYPE'] = 'JWT'
 app.config['JWT_IDENTITY_CLAIM'] = 'sub'
 app.config['JWT_SECRET_KEY'] = config.JWT_SECRET_KEY

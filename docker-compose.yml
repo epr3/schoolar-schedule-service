@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   app:
-    container_name: schedule
+    container_name: schedule_service
     build:
       dockerfile: Dockerfile
       context: .

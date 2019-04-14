@@ -26,6 +26,7 @@ class FacultyResource(Resource):
     return FacultyRepository.delete(id), 204
 
 class FacultyListResource(Resource):
+  @jwt_required
   def post(self):
     json_data = request.get_json()
     try:
