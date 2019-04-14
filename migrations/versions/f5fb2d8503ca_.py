@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 3c177e78b6d2
+Revision ID: f5fb2d8503ca
 Revises: 
-Create Date: 2019-04-02 09:04:18.186510
+Create Date: 2019-04-14 13:30:31.473114
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '3c177e78b6d2'
+revision = 'f5fb2d8503ca'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -43,7 +43,7 @@ def upgrade():
     sa.Column('id', sa.String(), nullable=False),
     sa.Column('course_path', sa.String(), nullable=False),
     sa.Column('subject_id', sa.String(), nullable=False),
-    sa.Column('professor_id', sa.String(), nullable=False),
+    sa.Column('user_id', sa.String(), nullable=False),
     sa.ForeignKeyConstraint(['subject_id'], ['subjects.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
@@ -59,7 +59,7 @@ def upgrade():
     sa.Column('is_notifiable', sa.Boolean(), nullable=True),
     sa.Column('subject_id', sa.String(), nullable=True),
     sa.Column('group_id', sa.String(), nullable=False),
-    sa.Column('professor_id', sa.String(), nullable=True),
+    sa.Column('user_id', sa.String(), nullable=True),
     sa.ForeignKeyConstraint(['group_id'], ['groups.id'], ondelete='CASCADE'),
     sa.ForeignKeyConstraint(['subject_id'], ['subjects.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')

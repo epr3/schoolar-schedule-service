@@ -23,7 +23,7 @@ class Event(db.Model, BaseModel, metaclass=MetaBaseModel):
         'groups.id', ondelete='CASCADE'), nullable=False)
     group = db.relationship(
         'Group', backref=db.backref('event_groups', lazy='dynamic'), foreign_keys=[group_id])
-    professor_id = db.Column(db.String)
+    user_id = db.Column(db.String)
 
 
 class EventSchema(Schema):
@@ -38,7 +38,7 @@ class EventSchema(Schema):
     is_notifiable = fields.Bool()
     subject_id = fields.Str(required=True, load_only=True)
     group_id = fields.Str(required=True, load_only=True)
-    professor_id = fields.Str(required=True, load_only=True)
+    user_id = fields.Str(required=True, load_only=True)
     subject = fields.Nested(SubjectSchema)
     group = fields.Nested(GroupSchema)
 

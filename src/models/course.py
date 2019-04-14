@@ -12,11 +12,11 @@ class Course(db.Model, BaseModel, metaclass=MetaBaseModel):
         'subjects.id', ondelete='CASCADE'), nullable=False)
     subject = db.relationship(
         'Subject', backref=db.backref('course_subjects', lazy='dynamic'), foreign_keys=[subject_id])
-    professor_id = db.Column(db.String, nullable=False)
+    user_id = db.Column(db.String, nullable=False)
 
 class CourseSchema(Schema):
     id = fields.Str(dump_only=True)
     course_path = fields.Str(required=True)
     subject_id = fields.Str(required=True, load_only=True)
-    professor_id = fields.Str(required=True, load_only=True)
+    user_id = fields.Str(required=True, load_only=True)
     subject = fields.Nested(SubjectSchema)

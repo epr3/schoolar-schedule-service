@@ -1,7 +1,7 @@
 .env
 Pipfile
 Pipfile.lock
-*.db
+*.sqlite
 *.log
 .vscode
 __pycache__
