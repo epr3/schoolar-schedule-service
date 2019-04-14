@@ -6,8 +6,12 @@ class GroupRepository:
     return Group.query.get_or_404(id)
 
   @staticmethod
-  def get_all():
-    return Group.query.all()
+  def get_all(**kwargs):
+    groups = Group.query
+    faculty_id = kwargs.get('faculty_id', None)
+    if faculty_id is not None:
+      groups = groups.filter(faculty_id=faculty_id)
+    return groups.all()
 
   def update(id, **kwargs):
     group = Group.query.get(id)

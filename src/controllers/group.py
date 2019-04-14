@@ -35,4 +35,4 @@ class GroupListResource(Resource):
     return group_schema.dump(GroupRepository.create(**data))
 
   def get(self):
-    return groups_schema.dump(GroupRepository.get_all())
+    return groups_schema.dump(GroupRepository.get_all(**request.args))

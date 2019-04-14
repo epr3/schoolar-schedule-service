@@ -7,8 +7,12 @@ class SubjectRepository:
     return Subject.query.get_or_404(id)
 
   @staticmethod
-  def get_all():
-    return Subject.query.all()
+  def get_all(**kwargs):
+    subjects = Subject.query
+    faculty_id = kwargs.get('faculty_id', None)
+    if faculty_id is not None:
+      subjects = subjects.filter(faculty_id=faculty_id)
+    return subjects.all()
 
   def update(id, **kwargs):
     subject = Subject.query.get(id)

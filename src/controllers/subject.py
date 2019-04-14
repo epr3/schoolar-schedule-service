@@ -35,4 +35,4 @@ class SubjectListResource(Resource):
     return subject_schema.dump(SubjectRepository.create(**data))
 
   def get(self):
-    return subjects_schema.dump(SubjectRepository.get_all())
+    return subjects_schema.dump(SubjectRepository.get_all(**request.args))
