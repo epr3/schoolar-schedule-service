@@ -11,9 +11,12 @@ faculty_schema = FacultySchema()
 faculties_schema = FacultySchema(many=True)
 
 class FacultyResource(Resource):
+  @jwt_required
   def get(self, id):
     return faculty_schema.dump(FacultyRepository.get(id))
 
+  @jwt_required
+  @roles_required(['ADMIN'])
   def put(self, id):
     json_data = request.get_json()
     try:
@@ -22,11 +25,14 @@ class FacultyResource(Resource):
       return err.messages, 422
     return faculty_schema.dump(FacultyRepository.update(id, **data))
 
+  @jwt_required
+  @roles_required(['ADMIN'])
   def delete(self, id):
     return FacultyRepository.delete(id), 204
 
 class FacultyListResource(Resource):
   @jwt_required
+  @roles_required(['ADMIN'])
   def post(self):
     json_data = request.get_json()
     try:
@@ -36,6 +42,5 @@ class FacultyListResource(Resource):
     return faculty_schema.dump(FacultyRepository.create(**data))
 
   @jwt_required
-  @roles_required(['ADMIN', 'STUDENT'])
   def get(self):
     return faculties_schema.dump(FacultyRepository.get_all())

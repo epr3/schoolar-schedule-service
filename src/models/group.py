@@ -1,23 +1,24 @@
 from marshmallow import Schema, fields
 from . import db, FacultySchema
 from .abstract import BaseModel, MetaBaseModel
+from sqlalchemy.dialects.postgresql import UUID
 from uuid import uuid4
 
 
 class Group(db.Model, BaseModel, metaclass=MetaBaseModel):
     __tablename__ = 'groups'
-    id = db.Column(db.String, primary_key=True, default=str(uuid4()))
+    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
     number = db.Column(db.String, nullable=False)
     year = db.Column(db.String, nullable=False)
-    faculty_id = db.Column(db.String, db.ForeignKey(
+    facultyId = db.Column(db.String, db.ForeignKey(
         'faculties.id', ondelete='CASCADE'), nullable=False)
     faculty = db.relationship(
-        'Faculty', backref=db.backref('group_faculties', lazy='dynamic'), foreign_keys=[faculty_id])
+        'Faculty', backref=db.backref('group_faculties', lazy='dynamic'), foreign_keys=[facultyId])
 
 
 class GroupSchema(Schema):
     id = fields.Str(dump_only=True)
     number = fields.Str(required=True)
     year = fields.Str(required=True)
-    faculty_id = fields.Str(required=True, load_only=True)
+    facultyId = fields.Str(required=True, load_only=True)
     faculty = fields.Nested(FacultySchema)

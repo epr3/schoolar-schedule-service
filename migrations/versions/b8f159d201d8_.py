@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: f5fb2d8503ca
+Revision ID: b8f159d201d8
 Revises: 
-Create Date: 2019-04-14 13:30:31.473114
+Create Date: 2019-04-20 18:19:49.803562
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'f5fb2d8503ca'
+revision = 'b8f159d201d8'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -27,24 +27,24 @@ def upgrade():
     sa.Column('id', sa.String(), nullable=False),
     sa.Column('number', sa.String(), nullable=False),
     sa.Column('year', sa.String(), nullable=False),
-    sa.Column('faculty_id', sa.String(), nullable=False),
-    sa.ForeignKeyConstraint(['faculty_id'], ['faculties.id'], ondelete='CASCADE'),
+    sa.Column('facultyId', sa.String(), nullable=False),
+    sa.ForeignKeyConstraint(['facultyId'], ['faculties.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('subjects',
     sa.Column('id', sa.String(), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
     sa.Column('credits', sa.Integer(), nullable=False),
-    sa.Column('faculty_id', sa.String(), nullable=False),
-    sa.ForeignKeyConstraint(['faculty_id'], ['faculties.id'], ondelete='CASCADE'),
+    sa.Column('facultyId', sa.String(), nullable=False),
+    sa.ForeignKeyConstraint(['facultyId'], ['faculties.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('courses',
     sa.Column('id', sa.String(), nullable=False),
     sa.Column('course_path', sa.String(), nullable=False),
-    sa.Column('subject_id', sa.String(), nullable=False),
-    sa.Column('user_id', sa.String(), nullable=False),
-    sa.ForeignKeyConstraint(['subject_id'], ['subjects.id'], ondelete='CASCADE'),
+    sa.Column('subjectId', sa.String(), nullable=False),
+    sa.Column('userId', sa.String(), nullable=False),
+    sa.ForeignKeyConstraint(['subjectId'], ['subjects.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('events',
@@ -52,16 +52,16 @@ def upgrade():
     sa.Column('room', sa.String(), nullable=True),
     sa.Column('interval', sa.Integer(), nullable=False),
     sa.Column('frequency', sa.String(), nullable=False),
-    sa.Column('start_date', sa.DateTime(), nullable=False),
-    sa.Column('end_date', sa.DateTime(), nullable=False),
+    sa.Column('startDate', sa.DateTime(), nullable=False),
+    sa.Column('endDate', sa.DateTime(), nullable=False),
     sa.Column('duration', sa.Integer(), nullable=False),
-    sa.Column('is_full_day', sa.Boolean(), nullable=True),
-    sa.Column('is_notifiable', sa.Boolean(), nullable=True),
-    sa.Column('subject_id', sa.String(), nullable=True),
-    sa.Column('group_id', sa.String(), nullable=False),
-    sa.Column('user_id', sa.String(), nullable=True),
-    sa.ForeignKeyConstraint(['group_id'], ['groups.id'], ondelete='CASCADE'),
-    sa.ForeignKeyConstraint(['subject_id'], ['subjects.id'], ondelete='CASCADE'),
+    sa.Column('isFullDay', sa.Boolean(), nullable=True),
+    sa.Column('isNotifiable', sa.Boolean(), nullable=True),
+    sa.Column('subjectId', sa.String(), nullable=True),
+    sa.Column('groupId', sa.String(), nullable=False),
+    sa.Column('userId', sa.String(), nullable=True),
+    sa.ForeignKeyConstraint(['groupId'], ['groups.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['subjectId'], ['subjects.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
