@@ -51,10 +51,12 @@ class EventListResource(Resource):
     @jwt_required
     def get(self):
         events = events_schema.dump(EventRepository.get_all(**request.args))
-        if request.args.get('start_date'):
-            start = parser.parse(request.args.get('start_date'))
-        if request.args.get('end_date'):
-            end = parser.parse(request.args.get('end_date'))
+        start = None
+        end = None
+        if request.args.get('startDate'):
+            start = parser.parse(request.args.get('startDate'))
+        if request.args.get('endDate'):
+            end = parser.parse(request.args.get('endDate'))
         if start and end:
             event_list = [{**exclude_keys(event, {'duration', 'interval'}), 'start_date': datetime.strftime(item, '%Y-%m-%d %H:%M:%S'), 'end_date': datetime.strftime(item + timedelta(seconds=event['duration']), '%Y-%m-%d %H:%M:%S')} for event in events for item in list(rrule(
                 WEEKLY if event['frequency'] == 'WEEKLY' else DAILY, dtstart=parser.parse(event['start_date']), until=parser.parse(event['end_date']), interval=event['interval'])) if item >= UTC.localize(start) and item <= UTC.localize(end)]
