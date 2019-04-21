@@ -10,10 +10,9 @@ class Group(db.Model, BaseModel, metaclass=MetaBaseModel):
     id = db.Column(UUIDType(binary=False), primary_key=True, default=uuid4)
     number = db.Column(db.String, nullable=False)
     year = db.Column(db.String, nullable=False)
-    facultyId = db.Column(db.String, db.ForeignKey(
+    facultyId = db.Column(UUIDType(binary=False), db.ForeignKey(
         'faculties.id', ondelete='CASCADE'), nullable=False)
-    faculty = db.relationship(
-        'Faculty', backref=db.backref('group_faculties', lazy='dynamic'), foreign_keys=[facultyId])
+    faculty = db.relationship('Faculty', viewonly=True)
 
 
 class GroupSchema(Schema):

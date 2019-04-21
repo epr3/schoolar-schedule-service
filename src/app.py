@@ -19,6 +19,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = config.DB_URI
 app.config['JWT_HEADER_TYPE'] = 'JWT'
 app.config['JWT_IDENTITY_CLAIM'] = 'sub'
+app.config['SQLALCHEMY_ECHO'] = True
 app.config['JWT_SECRET_KEY'] = config.JWT_SECRET_KEY
 db.init_app(app)
 db.app = app

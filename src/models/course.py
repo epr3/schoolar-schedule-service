@@ -9,7 +9,7 @@ class Course(db.Model, BaseModel, metaclass=MetaBaseModel):
     __tablename__ = 'courses'
     id = db.Column(UUIDType(binary=False), primary_key=True, default=uuid4)
     course_path = db.Column(db.String, nullable=False)
-    subjectId = db.Column(db.String, db.ForeignKey(
+    subjectId = db.Column(UUIDType(binary=False), db.ForeignKey(
         'subjects.id', ondelete='CASCADE'), nullable=False)
     subject = db.relationship(
         'Subject', backref=db.backref('course_subjects', lazy='dynamic'), foreign_keys=[subjectId])

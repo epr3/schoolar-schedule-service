@@ -16,15 +16,15 @@ class Event(db.Model, BaseModel, metaclass=MetaBaseModel):
     duration = db.Column(db.Integer, nullable=False)
     isFullDay = db.Column(db.Boolean, default=False)
     isNotifiable = db.Column(db.Boolean, default=False)
-    subjectId = db.Column(db.String, db.ForeignKey(
+    subjectId = db.Column(UUIDType(binary=False), db.ForeignKey(
         'subjects.id', ondelete='CASCADE'))
     subject = db.relationship(
         'Subject', backref=db.backref('event_subjects', lazy='dynamic'), foreign_keys=[subjectId])
-    groupId = db.Column(db.String, db.ForeignKey(
+    groupId = db.Column(UUIDType(binary=False), db.ForeignKey(
         'groups.id', ondelete='CASCADE'), nullable=False)
     group = db.relationship(
         'Group', backref=db.backref('event_groups', lazy='dynamic'), foreign_keys=[groupId])
-    professorId = db.Column(db.String)
+    professorId = db.Column(UUIDType(binary=False))
 
 
 class EventSchema(Schema):

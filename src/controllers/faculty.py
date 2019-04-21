@@ -13,6 +13,7 @@ faculties_schema = FacultySchema(many=True)
 class FacultyResource(Resource):
   @jwt_required
   def get(self, id):
+    # import pdb; pdb.set_trace()
     return faculty_schema.dump(FacultyRepository.get(id))
 
   @jwt_required

@@ -15,6 +15,7 @@ groups_schema = GroupSchema(many=True)
 class GroupResource(Resource):
   @jwt_required
   def get(self, id):
+    # import pdb; pdb.set_trace()
     return group_schema.dump(GroupRepository.get(id))
 
   @jwt_required
