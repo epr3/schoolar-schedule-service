@@ -1,13 +1,13 @@
+from sqlalchemy_utils import UUIDType
 from marshmallow import Schema, fields
 from . import db, SubjectSchema, GroupSchema
 from .abstract import BaseModel, MetaBaseModel
-from sqlalchemy.dialects.postgresql import UUID
 from uuid import uuid4
 
 
 class Event(db.Model, BaseModel, metaclass=MetaBaseModel):
     __tablename__ = 'events'
-    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
+    id = db.Column(UUIDType(binary=False), primary_key=True, default=uuid4)
     room = db.Column(db.String)
     interval = db.Column(db.Integer, nullable=False)
     frequency = db.Column(db.String, nullable=False)
@@ -24,7 +24,7 @@ class Event(db.Model, BaseModel, metaclass=MetaBaseModel):
         'groups.id', ondelete='CASCADE'), nullable=False)
     group = db.relationship(
         'Group', backref=db.backref('event_groups', lazy='dynamic'), foreign_keys=[groupId])
-    userId = db.Column(db.String)
+    professorId = db.Column(db.String)
 
 
 class EventSchema(Schema):
@@ -39,7 +39,7 @@ class EventSchema(Schema):
     isNotifiable = fields.Bool()
     subjectId = fields.Str(required=True, load_only=True)
     groupId = fields.Str(required=True, load_only=True)
-    userId = fields.Str(required=True, load_only=True)
+    professorId = fields.Str(required=True, load_only=True)
     subject = fields.Nested(SubjectSchema)
     group = fields.Nested(GroupSchema)
 

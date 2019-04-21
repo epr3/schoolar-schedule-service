@@ -13,7 +13,7 @@ class EventRepository:
         startDate = kwargs.get('startDate', None)
         endDate = kwargs.get('endDate', None)
         groupId = kwargs.get('groupId', None)
-        userId = kwargs.get('userId', None)
+        professorId = kwargs.get('professorId', None)
 
         if startDate is not None and is_valid_date(startDate):
             events = events.filter(Event.end_date >= startDate)
@@ -21,8 +21,8 @@ class EventRepository:
             events = events.filter(Event.startDate <= endDate)
         if groupId is not None:
             events = events.filter(Event.groupId == groupId)
-        if userId is not None:
-            events = events.filter(Event.userId == userId)
+        if professorId is not None:
+            events = events.filter(Event.professorId == professorId)
         return events.all()
 
     def update(id, **kwargs):
