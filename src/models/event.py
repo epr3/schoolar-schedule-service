@@ -1,6 +1,6 @@
 from sqlalchemy_utils import UUIDType
 from marshmallow import Schema, fields
-from . import db, SubjectSchema, GroupSchema
+from . import db, SubjectSchema, GroupSchema, EventTypeSchema
 from .abstract import BaseModel, MetaBaseModel
 from uuid import uuid4
 
@@ -24,6 +24,10 @@ class Event(db.Model, BaseModel, metaclass=MetaBaseModel):
         'groups.id', ondelete='CASCADE'), nullable=False)
     group = db.relationship(
         'Group', backref=db.backref('event_groups', lazy='dynamic'), foreign_keys=[groupId])
+    eventTypeId = db.Column(UUIDType(binary=False), db.ForeignKey(
+        'event_types.id', ondelete='CASCADE'), nullable=False)
+    eventType = db.relationship(
+        'EventType', backref=db.backref('event_types', lazy='dynamic'), foreign_keys=[eventTypeId])
     professorId = db.Column(UUIDType(binary=False))
 
 
@@ -42,4 +46,5 @@ class EventSchema(Schema):
     professorId = fields.Str(required=True, load_only=True)
     subject = fields.Nested(SubjectSchema)
     group = fields.Nested(GroupSchema)
+    eventType = fields.Nested(EventTypeSchema)
 
