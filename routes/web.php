@@ -18,3 +18,6 @@ $router->get('/', function () use ($router) {
 $router->get('/healthz', function () {
     return 'OK';
 });
+
+$router->get('/faculties', 'FacultyController@index');
+$router->post('/faculties', 'FacultyController@store');

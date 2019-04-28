@@ -8,8 +8,6 @@ services:
     command: php-fpm
     ports:
         - "9000:9000"
-    volumes:
-        - .:/var/www/html
   nginx:
     command: nginx -g "daemon off;"
     container_name: schedule_service
