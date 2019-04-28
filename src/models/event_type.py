@@ -14,4 +14,4 @@ class EventType(db.Model, BaseModel, metaclass=MetaBaseModel):
 class EventTypeSchema(Schema):
     id = fields.Str(dump_only=True)
     type = fields.Str(required=True)
-    color = fields.Str(required=True, load_only=True)
+    color = fields.Str(required=True)
