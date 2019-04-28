@@ -21,3 +21,6 @@ $router->get('/healthz', function () {
 
 $router->get('/faculties', 'FacultyController@index');
 $router->post('/faculties', 'FacultyController@store');
+$router->put('/faculties/{id}', 'FacultyController@update');
+$router->delete('/faculties/{id}', 'FacultyController@delete');
+

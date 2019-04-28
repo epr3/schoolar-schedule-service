@@ -19,11 +19,19 @@ class FacultyController extends Controller
         return $this->faculty->create($request->all());
     }
 
-    public function show($id) {}
+    public function show($id) {
+        return $this->faculty->get($id);
+    }
 
-    public function update(Request $request, $id) {}
+    public function update(Request $request, $id) {
+        $this->faculty->update($request->all(), $id);
+        return $this->faculty->get($id);
+    }
 
-    public function delete(Request $request, $id) {}
+    public function delete($id) {
+        $this->faculty->delete($id);
+        return response(null, 204);
+    }
 
     public function index()
     {
