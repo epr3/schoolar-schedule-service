@@ -77,14 +77,13 @@ class EventController extends Controller
         if (is_null($request->query('startDate')) && is_null($request->query('endDate'))) {
             return $eventList->load('group', 'subject', 'eventType');
         }
-        foreach ($eventList as $event) {
-            foreach (new RRule([
+        $eventList->map(function ($event) {
+            array_walk(new RRule([
                 'FREQ' => $event['frequency'],
                 'DTSTART' => $event['startDate'],
                 'UNTIL' => $event['endDate'],
                 'INTERVAL' => $event['interval'],
-            ]) as $occurence) {
-
+            ]), function ($occurence) {
                 array_push($response, [
                     'date' => Carbon::parse($occurence)->toDateString(),
                     'startTime' => $event['startTime'],
@@ -98,8 +97,8 @@ class EventController extends Controller
                     'eventType' => $event['eventType'],
                 ]);
 
-            }
-        }
+            });
+        });
         return $response;
     }
 
