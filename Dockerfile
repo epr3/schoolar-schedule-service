@@ -1,11 +1,15 @@
-FROM python:3.7
+FROM php:7-fpm-alpine
 
-WORKDIR /app
+RUN docker-php-ext-install mbstring tokenizer mysqli pdo_mysql
 
-COPY requirements.txt requirements.txt
+WORKDIR /database
 
-RUN pip install pipenv
+RUN touch ./db.sqlite
+RUN chgrp -R www-data /database
+RUN chmod -R 775 /database
 
-RUN pipenv install --pre -r requirements.txt
+WORKDIR /var/www/html
 
 ADD . .
+
+RUN php artisan migrate

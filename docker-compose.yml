@@ -1,19 +1,27 @@
 version: '3.5'
 services:
-  app:
-    container_name: schedule_service
+  php:
     build:
       dockerfile: Dockerfile
       context: .
     env_file: .env
-    volumes:
-      - ".:/app"
-    command: ["pipenv", "run", "gunicorn", "--bind", "0.0.0.0:3000", "--workers", "3", "src.wsgi:application", "--reload"]
+    command: php-fpm
     ports:
-      - "6000:3000"
+        - "9000:9000"
+    volumes:
+        - .:/var/www/html
+  nginx:
+    command: nginx -g "daemon off;"
+    container_name: schedule_service
+    image: nginx:latest
+    ports:
+        - "6000:3000"
+    volumes:
+        - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    links:
+        - php
 
 networks:
   default:
     external:
       name: schoolar-network
-
