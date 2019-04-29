@@ -9,7 +9,7 @@
 | It is a breeze. Simply tell Lumen the URIs it should respond to
 | and give it the Closure to call when that URI is requested.
 |
-*/
+ */
 
 $router->get('/', function () use ($router) {
     return $router->app->version();
@@ -19,7 +19,7 @@ $router->get('/healthz', function () {
     return 'OK';
 });
 
-$router->get('/faculties', 'FacultyController@index');
+$router->get('/faculties', ['middleware' => 'jwt', 'uses' => 'FacultyController@index']);
 $router->post('/faculties', 'FacultyController@store');
 $router->put('/faculties/{id}', 'FacultyController@update');
 $router->delete('/faculties/{id}', 'FacultyController@delete');
@@ -35,6 +35,7 @@ $router->put('/events/{id}', 'EventController@update');
 $router->delete('/events/{id}', 'EventController@delete');
 
 $router->get('/groups', 'GroupController@index');
+$router->get('/groups/{id}', 'GroupController@show');
 $router->post('/groups', 'GroupController@store');
 $router->put('/groups/{id}', 'GroupController@update');
 $router->delete('/groups/{id}', 'GroupController@delete');

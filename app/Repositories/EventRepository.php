@@ -1,20 +1,24 @@
 <?php namespace App\Repositories;
 
+use Carbon\Carbon;
 use App\Models\Event;
+
 
 class EventRepository implements RepositoryInterface
 {
     public function all($data)
     {
         $eventQuery = [];
+
+        // dd(Event::where([['endDate', '<=', Carbon::parse($data['endDate'])->toDateString()]])->get());
         if (empty($data)) {
             return Event::all();
         }
         if (isset($data['startDate'])) {
-            array_push($eventQuery, ['startDate', '>=', $data['startDate']]);
+            array_push($eventQuery, ['endDate', '>=', Carbon::parse($data['startDate'])->toDateString()]);
         }
         if (isset($data['endDate'])) {
-            array_push($eventQuery, ['endDate', '<=', $data['endDate']]);
+            array_push($eventQuery, ['startDate', '<=', Carbon::parse($data['endDate'])->toDateString()]);
         }
         if (isset($data['groupId'])) {
             array_push($eventQuery, ['groupId', '=', $data['groupId']]);

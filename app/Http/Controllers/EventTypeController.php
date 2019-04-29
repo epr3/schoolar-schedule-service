@@ -9,7 +9,7 @@ class EventTypeController extends Controller
 
     protected $eventType;
 
-    public function __construct(EventType $eventType)
+    public function __construct(EventTypeRepository $eventType)
     {
         $this->eventType = $eventType;
     }

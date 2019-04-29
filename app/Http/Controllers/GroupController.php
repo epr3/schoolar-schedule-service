@@ -38,7 +38,7 @@ class GroupController extends Controller
 
     public function index(Request $request)
     {
-        return $this->group->all($request->query());
+        return $this->group->all($request->query())->load('events');
     }
 
 }

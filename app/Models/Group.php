@@ -11,4 +11,8 @@ class Group extends Model
     protected $fillable = [
         'number', 'year', 'facultyId',
     ];
+
+    public function events() {
+        return $this->hasMany('App\Models\Event', 'groupId');
+    }
 }

@@ -25,14 +25,14 @@ class Event extends Model
     ];
 
     public function subject() {
-        return $this->belongsTo('App\Subject');
+        return $this->belongsTo('App\Models\Subject', 'subjectId');
     }
 
     public function group() {
-        return $this->belongsTo('App\Group');
+        return $this->belongsTo('App\Models\Group', 'groupId');
     }
 
     public function eventType() {
-        return $this->belongsTo('App\EventType');
+        return $this->belongsTo('App\Models\EventType', 'eventTypeId');
     }
 }
