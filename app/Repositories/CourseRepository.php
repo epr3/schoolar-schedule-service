@@ -4,7 +4,7 @@ use App\Models\Course;
 
 class CourseRepository implements RepositoryInterface
 {
-    public function all()
+    public function all($data)
     {
         return Course::all();
     }

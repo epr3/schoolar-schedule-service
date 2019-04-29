@@ -5,9 +5,13 @@ use App\Models\Group;
 
 class GroupRepository implements RepositoryInterface
 {
-    public function all()
+    public function all($data)
     {
-        return Group::all();
+        if (empty($data)) {
+            return Group::all();
+        }
+        return Group::where($data)->get();
+
     }
 
     public function create(array $data)

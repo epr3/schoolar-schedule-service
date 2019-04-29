@@ -4,7 +4,7 @@ use App\Models\EventType;
 
 class EventTypeRepository implements RepositoryInterface
 {
-    public function all()
+    public function all($data)
     {
         return EventType::all();
     }

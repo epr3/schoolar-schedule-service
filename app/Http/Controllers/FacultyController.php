@@ -35,7 +35,7 @@ class FacultyController extends Controller
 
     public function index()
     {
-        return $this->faculty->all();
+        return $this->faculty->all(null);
     }
 
 }

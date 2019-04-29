@@ -5,7 +5,7 @@ use App\Models\Faculty;
 
 class FacultyRepository implements RepositoryInterface
 {
-    public function all()
+    public function all($data)
     {
         return Faculty::all();
     }

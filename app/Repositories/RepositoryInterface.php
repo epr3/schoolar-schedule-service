@@ -3,7 +3,7 @@ namespace App\Repositories;
 
 interface RepositoryInterface
 {
-    public function all();
+    public function all($data);
 
     public function create(array $data);
 

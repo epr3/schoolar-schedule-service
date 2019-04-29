@@ -4,9 +4,12 @@ use App\Models\Subject;
 
 class SubjectRepository implements RepositoryInterface
 {
-    public function all()
+    public function all($data)
     {
-        return Subject::all();
+        if (empty($data)) {
+            return Subject::all();
+        }
+        return Subject::where($data)->get();
     }
 
     public function create(array $data)
