@@ -16,6 +16,12 @@ class GroupController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'number' => 'required',
+            'year' => 'required',
+            'facultyId' => 'required',
+        ]);
+
         return $this->group->create($request->all());
     }
 
@@ -26,6 +32,12 @@ class GroupController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'number' => 'required',
+            'year' => 'required',
+            'facultyId' => 'required',
+        ]);
+
         $this->group->update($request->all(), $id);
         return $this->group->get($id);
     }

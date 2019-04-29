@@ -16,6 +16,11 @@ class EventTypeController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'type' => 'required',
+            'color' => 'required',
+        ]);
+
         return $this->eventType->create($request->all());
     }
 
@@ -26,6 +31,11 @@ class EventTypeController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'type' => 'required',
+            'color' => 'required',
+        ]);
+
         $this->eventType->update($request->all(), $id);
         return $this->eventType->get($id);
     }

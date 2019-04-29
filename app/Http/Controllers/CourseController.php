@@ -16,6 +16,10 @@ class CourseController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'course_path' => 'required',
+            'subjectId' => 'required',
+        ]);
         return $this->course->create($request->all());
     }
 
@@ -26,6 +30,11 @@ class CourseController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'course_path' => 'required',
+            'subjectId' => 'required',
+        ]);
+
         $this->course->update($request->all(), $id);
         return $this->course->get($id);
     }

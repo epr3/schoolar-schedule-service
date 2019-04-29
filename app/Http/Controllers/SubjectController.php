@@ -16,6 +16,12 @@ class SubjectController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'credits' => 'required|integer',
+            'facultyId' => 'required',
+        ]);
+
         return $this->subject->create($request->all());
     }
 
@@ -26,6 +32,12 @@ class SubjectController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'credits' => 'required|integer',
+            'facultyId' => 'required',
+        ]);
+
         $this->subject->update($request->all(), $id);
         return $this->subject->get($id);
     }
