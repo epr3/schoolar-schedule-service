@@ -25,6 +25,7 @@ $router->put('/faculties/{id}', ['middleware' => 'jwt', 'uses' => 'FacultyContro
 $router->delete('/faculties/{id}', ['middleware' => 'jwt', 'uses' => 'FacultyController@delete']);
 
 $router->get('/subjects', ['middleware' => 'jwt', 'uses' => 'SubjectController@index']);
+$router->get('/subjects/{id}', ['middleware' => 'jwt', 'uses' => 'SubjectController@show']);
 $router->post('/subjects', ['middleware' => 'jwt', 'uses' => 'SubjectController@store']);
 $router->put('/subjects/{id}', ['middleware' => 'jwt', 'uses' => 'SubjectController@update']);
 $router->delete('/subjects/{id}', ['middleware' => 'jwt', 'uses' => 'SubjectController@delete']);
@@ -41,6 +42,7 @@ $router->put('/groups/{id}', ['middleware' => 'jwt', 'uses' => 'GroupController@
 $router->delete('/groups/{id}', ['middleware' => 'jwt', 'uses' => 'GroupController@delete']);
 
 $router->get('/event_types', ['middleware' => 'jwt', 'uses' => 'EventTypeController@index']);
+$router->get('/event_types/{id}', ['middleware' => 'jwt', 'uses' => 'EventTypeController@show']);
 $router->post('/event_types', ['middleware' => 'jwt', 'uses' => 'EventTypeController@store']);
 $router->put('/event_types/{id}', ['middleware' => 'jwt', 'uses' => 'EventTypeController@update']);
 $router->delete('/event_types/{id}', ['middleware' => 'jwt', 'uses' => 'EventTypeController@delete']);
