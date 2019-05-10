@@ -72,32 +72,32 @@ class EventController extends Controller
 
     public function index(Request $request)
     {
-        $response = [];
         $eventList = $this->event->all($request->query());
         if (is_null($request->query('startDate')) && is_null($request->query('endDate'))) {
             return $eventList;
         }
-        $eventList->map(function ($event) {
-            array_walk(new RRule([
+        $response = $eventList->map(function ($event) {
+            $rules = new RRule([
                 'FREQ' => $event['frequency'],
                 'DTSTART' => $event['startDate'],
                 'UNTIL' => $event['endDate'],
                 'INTERVAL' => $event['interval'],
-            ]), function ($occurence) {
-                array_push($response, [
+            ]);
+            foreach ($rules as $occurence) {
+                return [
+                    'id' => $event['id'],
                     'date' => Carbon::parse($occurence)->toDateString(),
                     'startTime' => $event['startTime'],
                     'endTime' => $event['endTime'],
                     'room' => $event['room'],
                     'isFullDay' => filter_var($event['isFullDay'], FILTER_VALIDATE_BOOLEAN),
                     'isNotifiable' => filter_var($event['isNotifiable'], FILTER_VALIDATE_BOOLEAN),
-                    'subject' => $event['subject'],
-                    'group' => $event['group'],
+                    'subjectId' => $event['subjectId'],
+                    'groupId' => $event['groupId'],
                     'professorId' => $event['professorId'],
-                    'eventType' => $event['eventType'],
-                ]);
-
-            });
+                    'eventTypeId' => $event['eventTypeId'],
+                ];
+            };
         });
         return $response;
     }
