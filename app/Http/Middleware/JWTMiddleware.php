@@ -24,7 +24,7 @@ class JWTMiddleware
             return response('Unauthorized', 401);
         }
         try {
-            $credentials = JWT::decode(explode('JWT ', $token)[1], env('JWT_SECRET'), array('HS256'));
+            $credentials = JWT::decode(explode('Bearer ', $token)[1], env('JWT_SECRET'), array('HS256'));
         } catch(ExpiredException $e) {
             return response()->json([
                 'message' => 'Provided token is expired.'
