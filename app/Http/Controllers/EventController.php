@@ -75,7 +75,7 @@ class EventController extends Controller
         $response = [];
         $eventList = $this->event->all($request->query());
         if (is_null($request->query('startDate')) && is_null($request->query('endDate'))) {
-            return $eventList->load('group', 'subject', 'eventType');
+            return $eventList;
         }
         $eventList->map(function ($event) {
             array_walk(new RRule([
