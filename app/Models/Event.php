@@ -8,6 +8,11 @@ class Event extends Model
 {
     use UUIDModel;
 
+    protected $casts = [
+        'isFullDay' => 'boolean',
+        'isNotifiable' => 'boolean',
+    ];
+
     protected $fillable = [
         'room',
         'interval',

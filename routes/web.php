@@ -31,6 +31,7 @@ $router->put('/subjects/{id}', ['middleware' => 'jwt', 'uses' => 'SubjectControl
 $router->delete('/subjects/{id}', ['middleware' => 'jwt', 'uses' => 'SubjectController@delete']);
 
 $router->get('/events', ['middleware' => 'jwt', 'uses' => 'EventController@index']);
+$router->get('/events/{id}', ['middleware' => 'jwt', 'uses' => 'EventController@show']);
 $router->post('/events', ['middleware' => 'jwt', 'uses' => 'EventController@store']);
 $router->put('/events/{id}', ['middleware' => 'jwt', 'uses' => 'EventController@update']);
 $router->delete('/events/{id}', ['middleware' => 'jwt', 'uses' => 'EventController@delete']);
