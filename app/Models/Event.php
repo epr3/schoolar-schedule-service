@@ -25,7 +25,7 @@ class Event extends Model
         'isNotifiable',
         'subjectId',
         'groupId',
-        'professorId',
+        'userId',
         'eventTypeId',
     ];
 

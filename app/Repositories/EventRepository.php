@@ -23,8 +23,8 @@ class EventRepository implements RepositoryInterface
         if (isset($data['groupId'])) {
             array_push($eventQuery, ['groupId', '=', $data['groupId']]);
         }
-        if (isset($data['professorId'])) {
-            array_push($eventQuery, ['professorId', '=', $data['professorId']]);
+        if (isset($data['userId'])) {
+            array_push($eventQuery, ['userId', '=', $data['userId']]);
         }
         return Event::where($eventQuery)->get();
     }

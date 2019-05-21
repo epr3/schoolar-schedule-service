@@ -30,7 +30,7 @@ class EventController extends Controller
             'isNotifiable' => 'required|boolean',
             'subjectId' => 'required',
             'groupId' => 'required',
-            'professorId' => 'required',
+            'userId' => 'required',
             'eventTypeId' => 'required',
         ]);
 
@@ -56,7 +56,7 @@ class EventController extends Controller
             'isNotifiable' => 'required|boolean',
             'subjectId' => 'required',
             'groupId' => 'required',
-            'professorId' => 'required',
+            'userId' => 'required',
             'eventTypeId' => 'required',
         ]);
 

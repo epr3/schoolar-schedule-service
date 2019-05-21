@@ -36,7 +36,7 @@ class CreateEventsTable extends Migration
             $table->foreign('eventTypeId')
                 ->references('id')->on('event_types')
                 ->onDelete('cascade');
-            $table->string('professorId');
+            $table->string('userId');
 
             $table->timestamps();
         });
