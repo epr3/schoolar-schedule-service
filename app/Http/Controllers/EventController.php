@@ -94,7 +94,7 @@ class EventController extends Controller
                     'isNotifiable' => filter_var($event['isNotifiable'], FILTER_VALIDATE_BOOLEAN),
                     'subjectId' => $event['subjectId'],
                     'groupId' => $event['groupId'],
-                    'professorId' => $event['professorId'],
+                    'userId' => $event['userId'],
                     'eventTypeId' => $event['eventTypeId'],
                 ];
             };
