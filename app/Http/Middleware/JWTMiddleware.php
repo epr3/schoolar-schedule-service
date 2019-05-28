@@ -30,7 +30,6 @@ class JWTMiddleware
                 'message' => 'Provided token is expired.'
             ], 400);
         } catch(Exception $e) {
-            dd($e);
             return response()->json([
                 'message' => 'An error occured while decoding token.'
             ], 400);
