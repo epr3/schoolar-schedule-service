@@ -20,6 +20,7 @@ $router->get('/healthz', function () {
 });
 
 $router->get('/faculties', ['middleware' => 'jwt', 'uses' => 'FacultyController@index']);
+$router->get('/faculties/{id}', ['middleware' => 'jwt', 'uses' => 'FacultyController@show']);
 $router->post('/faculties', ['middleware' => 'jwt', 'uses' => 'FacultyController@store']);
 $router->put('/faculties/{id}', ['middleware' => 'jwt', 'uses' => 'FacultyController@update']);
 $router->delete('/faculties/{id}', ['middleware' => 'jwt', 'uses' => 'FacultyController@delete']);
