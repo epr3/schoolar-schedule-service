@@ -114,7 +114,8 @@ class EventController extends Controller
             };
             return $eventArray;
         });
-        return array_merge(...$response);
+
+        return count($response) ? array_merge(...$response) : [];
     }
 
 }
