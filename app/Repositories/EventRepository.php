@@ -10,7 +10,6 @@ class EventRepository implements RepositoryInterface
     {
         $eventQuery = [];
 
-        // dd(Event::where([['endDate', '<=', Carbon::parse($data['endDate'])->toDateString()]])->get());
         if (empty($data)) {
             return Event::all();
         }

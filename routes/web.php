@@ -53,3 +53,9 @@ $router->get('/courses', ['middleware' => 'jwt', 'uses' => 'CourseController@ind
 $router->post('/courses', ['middleware' => 'jwt', 'uses' => 'CourseController@store']);
 $router->put('/courses/{id}', ['middleware' => 'jwt', 'uses' => 'CourseController@update']);
 $router->delete('/courses/{id}', ['middleware' => 'jwt', 'uses' => 'CourseController@delete']);
+
+$router->get('/holidays', ['middleware' => 'jwt', 'uses' => 'HolidayController@index']);
+$router->post('/holidays', ['middleware' => 'jwt', 'uses' => 'HolidayController@store']);
+$router->put('/holidays/{id}', ['middleware' => 'jwt', 'uses' => 'HolidayController@update']);
+$router->delete('/holidays/{id}', ['middleware' => 'jwt', 'uses' => 'HolidayController@delete']);
+

@@ -22,8 +22,6 @@ class CreateEventsTable extends Migration
             $table->date('endDate');
             $table->time('startTime');
             $table->time('endTime');
-            $table->boolean('isFullDay');
-            $table->boolean('isNotifiable');
             $table->uuid('subjectId');
             $table->uuid('groupId');
             $table->uuid('eventTypeId');

@@ -1,19 +1,24 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use App\Repositories\EventRepository;
+use App\Repositories\HolidayRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use RRule\RRule;
+use RRule\RSet;
 
 class EventController extends Controller
 {
 
     protected $event;
+    protected $holiday;
 
-    public function __construct(EventRepository $event)
+    public function __construct(EventRepository $event, HolidayRepository $holiday)
     {
         $this->event = $event;
+        $this->holiday = $holiday;
     }
 
     public function store(Request $request)
@@ -26,8 +31,6 @@ class EventController extends Controller
             'endDate' => 'required|date',
             'startTime' => 'required',
             'endTime' => 'required',
-            'isFullDay' => 'required|boolean',
-            'isNotifiable' => 'required|boolean',
             'subjectId' => 'required',
             'groupId' => 'required',
             'userId' => 'required',
@@ -52,8 +55,6 @@ class EventController extends Controller
             'endDate' => 'required|date',
             'startTime' => 'required',
             'endTime' => 'required',
-            'isFullDay' => 'required|boolean',
-            'isNotifiable' => 'required|boolean',
             'subjectId' => 'required',
             'groupId' => 'required',
             'userId' => 'required',
@@ -76,30 +77,44 @@ class EventController extends Controller
         if (is_null($request->query('startDate')) && is_null($request->query('endDate'))) {
             return $eventList;
         }
-        $response = $eventList->map(function ($event) {
+        $holidayRset = new RSet();
+        $holidays = $this->holiday->all(null);
+        $holidays->each(function ($holiday) use ($holidayRset) {
+            $holidayRule = new RRule([
+                'FREQ' => 'DAILY',
+                'DTSTART' => $holiday['startDate'],
+                'UNTIL' => $holiday['endDate'],
+                'INTERVAL' => 1,
+            ]);
+            $holidayRset->addExRule($holidayRule);
+        });
+        $response = $eventList->map(function ($event) use ($holidayRset, $request) {
+            $rset = $holidayRset;
             $rules = new RRule([
                 'FREQ' => $event['frequency'],
-                'DTSTART' => $event['startDate'],
-                'UNTIL' => $event['endDate'],
+                'DTSTART' => Carbon::parse($event['startDate'])->gte(Carbon::parse($request->query('startDate'))) ? $event['startDate'] : $request->query('startDate'),
+                'UNTIL' =>  Carbon::parse($event['endDate'])->lte(Carbon::parse($request->query('endDate'))) ? $event['endDate'] : $request->query('endDate'),
                 'INTERVAL' => $event['interval'],
             ]);
-            foreach ($rules as $occurence) {
-                return [
-                    'id' => $event['id'],
+            $rset->addRRule($rules);
+            $eventArray = [];
+            foreach ($rset as $occurence) {
+                array_push($eventArray, [
+                    'id' => (string) Str::uuid(),
                     'date' => Carbon::parse($occurence)->toDateString(),
                     'startTime' => $event['startTime'],
                     'endTime' => $event['endTime'],
                     'room' => $event['room'],
-                    'isFullDay' => filter_var($event['isFullDay'], FILTER_VALIDATE_BOOLEAN),
-                    'isNotifiable' => filter_var($event['isNotifiable'], FILTER_VALIDATE_BOOLEAN),
+                    'eventId' => $event['id'],
                     'subjectId' => $event['subjectId'],
                     'groupId' => $event['groupId'],
                     'userId' => $event['userId'],
                     'eventTypeId' => $event['eventTypeId'],
-                ];
+                ]);
             };
+            return $eventArray;
         });
-        return $response;
+        return array_merge(...$response);
     }
 
 }
