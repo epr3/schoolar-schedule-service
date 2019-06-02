@@ -1,11 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Str;
 use App\Repositories\EventRepository;
 use App\Repositories\HolidayRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use RRule\RRule;
 use RRule\RSet;
 
@@ -92,25 +92,30 @@ class EventController extends Controller
             $rset = $holidayRset;
             $rules = new RRule([
                 'FREQ' => $event['frequency'],
-                'DTSTART' => Carbon::parse($event['startDate'])->gte(Carbon::parse($request->query('startDate'))) ? $event['startDate'] : $request->query('startDate'),
-                'UNTIL' =>  Carbon::parse($event['endDate'])->lte(Carbon::parse($request->query('endDate'))) ? $event['endDate'] : $request->query('endDate'),
+                'DTSTART' => $event['startDate'],
+                'UNTIL' => $event['endDate'],
                 'INTERVAL' => $event['interval'],
             ]);
             $rset->addRRule($rules);
             $eventArray = [];
             foreach ($rset as $occurence) {
-                array_push($eventArray, [
-                    'id' => (string) Str::uuid(),
-                    'date' => Carbon::parse($occurence)->toDateString(),
-                    'startTime' => $event['startTime'],
-                    'endTime' => $event['endTime'],
-                    'room' => $event['room'],
-                    'eventId' => $event['id'],
-                    'subjectId' => $event['subjectId'],
-                    'groupId' => $event['groupId'],
-                    'userId' => $event['userId'],
-                    'eventTypeId' => $event['eventTypeId'],
-                ]);
+                $date = Carbon::parse($occurence);
+                if (Carbon::parse($occurence)->between(Carbon::parse($request->query('startDate')), Carbon::parse($request->query('endDate')))) {
+                    array_push($eventArray, [
+                        'id' => (string) Str::uuid(),
+                        'date' => $date->toDateString(),
+                        'startTime' => $event['startTime'],
+                        'endTime' => $event['endTime'],
+                        'room' => $event['room'],
+                        'eventId' => $event['id'],
+                        'subjectId' => $event['subjectId'],
+                        'groupId' => $event['groupId'],
+                        'userId' => $event['userId'],
+                        'eventTypeId' => $event['eventTypeId'],
+                    ]);
+
+                }
+
             };
             return $eventArray;
         });
