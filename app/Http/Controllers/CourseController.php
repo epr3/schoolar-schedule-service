@@ -17,8 +17,11 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'course_path' => 'required',
+            'name' => 'required',
+            'coursePath' => 'required',
+            'userId' => 'required',
             'subjectId' => 'required',
+            'courseFilename' => 'required',
         ]);
         return $this->course->create($request->all());
     }
@@ -31,8 +34,11 @@ class CourseController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'course_path' => 'required',
+            'name' => 'required',
+            'coursePath' => 'required',
+            'userId' => 'required',
             'subjectId' => 'required',
+            'courseFilename' => 'required',
         ]);
 
         $this->course->update($request->all(), $id);
@@ -45,9 +51,9 @@ class CourseController extends Controller
         return response(null, 204);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return $this->course->all();
+        return $this->course->all($request->query());
     }
 
 }

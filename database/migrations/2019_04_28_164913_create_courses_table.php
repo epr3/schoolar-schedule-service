@@ -15,8 +15,11 @@ class CreateCoursesTable extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('course_path');
+            $table->string('coursePath');
+            $table->string('courseFilename');
+            $table->string('name');
             $table->uuid('subjectId');
+            $table->uuid('userId');
             $table->foreign('subjectId')
                 ->references('id')->on('subjects')
                 ->onDelete('cascade');

@@ -9,6 +9,6 @@ class Course extends Model
     use UUIDModel;
 
     protected $fillable = [
-        'course_path', 'subjectId'
+        'coursePath', 'subjectId', 'userId', 'name', 'courseFilename',
     ];
 }

@@ -25,6 +25,13 @@ $router->post('/faculties', ['middleware' => 'jwt', 'uses' => 'FacultyController
 $router->put('/faculties/{id}', ['middleware' => 'jwt', 'uses' => 'FacultyController@update']);
 $router->delete('/faculties/{id}', ['middleware' => 'jwt', 'uses' => 'FacultyController@delete']);
 
+$router->get('/courses', ['middleware' => 'jwt', 'uses' => 'CourseController@index']);
+$router->get('/courses/{id}', ['middleware' => 'jwt', 'uses' => 'CourseController@show']);
+$router->post('/courses', ['middleware' => 'jwt', 'uses' => 'CourseController@store']);
+$router->put('/courses/{id}', ['middleware' => 'jwt', 'uses' => 'CourseController@update']);
+$router->delete('/courses/{id}', ['middleware' => 'jwt', 'uses' => 'CourseController@delete']);
+
+
 $router->get('/subjects', ['middleware' => 'jwt', 'uses' => 'SubjectController@index']);
 $router->get('/subjects/{id}', ['middleware' => 'jwt', 'uses' => 'SubjectController@show']);
 $router->post('/subjects', ['middleware' => 'jwt', 'uses' => 'SubjectController@store']);

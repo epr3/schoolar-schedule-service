@@ -3,7 +3,7 @@ source: './app'
 filePattern: '*.php'
 ignore: 'tests'
 formatter: 'PhpDA\Writer\Strategy\Svg'
-target: './total.svg'
+target: './schedule-service.svg'
 groupLength: 1
 visitor:
   - PhpDA\Parser\Visitor\TagCollector
