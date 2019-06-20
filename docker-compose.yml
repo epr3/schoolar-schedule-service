@@ -7,6 +7,8 @@ services:
       dockerfile: Dockerfile
       context: .
     command: "/usr/bin/supervisord"
+    volumes:
+      - .:/var/www/html
     ports:
         - "6000:3000"
 

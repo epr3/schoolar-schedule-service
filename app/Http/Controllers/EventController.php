@@ -89,7 +89,7 @@ class EventController extends Controller
             $holidayRset->addExRule($holidayRule);
         });
         $response = $eventList->map(function ($event) use ($holidayRset, $request) {
-            $rset = $holidayRset;
+            $rset = clone $holidayRset;
             $rules = new RRule([
                 'FREQ' => $event['frequency'],
                 'DTSTART' => $event['startDate'],
@@ -104,6 +104,7 @@ class EventController extends Controller
                     array_push($eventArray, [
                         'id' => (string) Str::uuid(),
                         'date' => $date->toDateString(),
+                        'frequency' => $event['frequency'],
                         'startTime' => $event['startTime'],
                         'endTime' => $event['endTime'],
                         'room' => $event['room'],
