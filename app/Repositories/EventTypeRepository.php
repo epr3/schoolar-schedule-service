@@ -6,7 +6,11 @@ class EventTypeRepository implements RepositoryInterface
 {
     public function all($data)
     {
-        return EventType::all();
+        if (empty($data)) {
+            return EventType::all();
+        }
+
+        return EventType::where($data)->get();
     }
 
     public function create(array $data)

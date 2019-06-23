@@ -75,7 +75,9 @@ class EventController extends Controller
     {
         $eventList = $this->event->all($request->query());
         if (is_null($request->query('startDate')) && is_null($request->query('endDate'))) {
-            return $eventList;
+            return $eventList->filter(function ($event) {
+                return !$event->eventType->isTest;
+            });
         }
         $holidayRset = new RSet();
         $holidays = $this->holiday->all(null);

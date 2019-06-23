@@ -27,6 +27,7 @@ class Event extends Model
         'groupId',
         'userId',
         'eventTypeId',
+        'sessionId',
     ];
 
     public function subject() {

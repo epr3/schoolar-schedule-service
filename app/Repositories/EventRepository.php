@@ -1,11 +1,19 @@
 <?php namespace App\Repositories;
 
-use Carbon\Carbon;
 use App\Models\Event;
-
+use Carbon\Carbon;
 
 class EventRepository implements RepositoryInterface
 {
+
+    public function find($data)
+    {
+        if (empty($data)) {
+            return Event::first();
+        }
+        return Event::where($data)->first();
+    }
+
     public function all($data)
     {
         $eventQuery = [];
@@ -13,6 +21,10 @@ class EventRepository implements RepositoryInterface
         if (empty($data)) {
             return Event::all();
         }
+        if (isset($data['sessionId'])) {
+            array_push($eventQuery, ['sessionId', '=', $data['sessionId']]);
+        }
+
         if (isset($data['startDate'])) {
             array_push($eventQuery, ['endDate', '>=', Carbon::parse($data['startDate'])->toDateString()]);
         }

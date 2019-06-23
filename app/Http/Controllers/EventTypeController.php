@@ -19,6 +19,7 @@ class EventTypeController extends Controller
         $this->validate($request, [
             'type' => 'required',
             'color' => 'required',
+            'isTest' => 'required|boolean',
         ]);
 
         return $this->eventType->create($request->all());
@@ -34,6 +35,7 @@ class EventTypeController extends Controller
         $this->validate($request, [
             'type' => 'required',
             'color' => 'required',
+            'isTest' => 'required|boolean',
         ]);
 
         $this->eventType->update($request->all(), $id);
@@ -46,9 +48,9 @@ class EventTypeController extends Controller
         return response(null, 204);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return $this->eventType->all(null);
+        return $this->eventType->all($request->query());
     }
 
 }

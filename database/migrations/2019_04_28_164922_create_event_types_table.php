@@ -17,6 +17,7 @@ class CreateEventTypesTable extends Migration
             $table->uuid('id')->primary();
             $table->string('type');
             $table->string('color');
+            $table->boolean('isTest');
             $table->timestamps();
         });
     }

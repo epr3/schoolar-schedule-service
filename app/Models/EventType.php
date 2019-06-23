@@ -9,6 +9,6 @@ class EventType extends Model
     use UUIDModel;
 
     protected $fillable = [
-        'type', 'color',
+        'type', 'color', 'isTest',
     ];
 }

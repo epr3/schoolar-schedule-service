@@ -25,6 +25,7 @@ class CreateEventsTable extends Migration
             $table->uuid('subjectId');
             $table->uuid('groupId');
             $table->uuid('eventTypeId');
+            $table->uuid('sessionId')->nullable();
             $table->foreign('subjectId')
                 ->references('id')->on('subjects')
                 ->onDelete('cascade');
