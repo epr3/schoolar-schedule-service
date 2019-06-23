@@ -11,4 +11,8 @@ class Subject extends Model
     protected $fillable = [
         'name', 'credits', 'facultyId',
     ];
+
+    public function professors() {
+        return $this->hasMany('App\Models\SubjectProfessor', 'subjectId');
+    }
 }

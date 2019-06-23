@@ -38,6 +38,13 @@ $router->post('/subjects', ['middleware' => 'jwt', 'uses' => 'SubjectController@
 $router->put('/subjects/{id}', ['middleware' => 'jwt', 'uses' => 'SubjectController@update']);
 $router->delete('/subjects/{id}', ['middleware' => 'jwt', 'uses' => 'SubjectController@delete']);
 
+$router->get('/subject-professors', ['middleware' => 'jwt', 'uses' => 'SubjectProfessorController@index']);
+$router->get('/subject-professors/{id}', ['middleware' => 'jwt', 'uses' => 'SubjectProfessorController@show']);
+$router->post('/subject-professors', ['middleware' => 'jwt', 'uses' => 'SubjectProfessorController@store']);
+$router->put('/subject-professors/{id}', ['middleware' => 'jwt', 'uses' => 'SubjectProfessorController@update']);
+$router->delete('/subject-professors/{id}', ['middleware' => 'jwt', 'uses' => 'SubjectProfessorController@delete']);
+
+
 $router->get('/events', ['middleware' => 'jwt', 'uses' => 'EventController@index']);
 $router->get('/events/{id}', ['middleware' => 'jwt', 'uses' => 'EventController@show']);
 $router->post('/events', ['middleware' => 'jwt', 'uses' => 'EventController@store']);
