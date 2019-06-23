@@ -9,6 +9,12 @@ class SubjectRepository implements RepositoryInterface
         if (empty($data)) {
             return Subject::all();
         }
+
+        if (isset($data['userId'])) {
+            return Subject::whereHas('professors', function ($q) use($data) {
+                $q->where('userId', '=', $data['userId']);
+            })->get();
+        }
         return Subject::where($data)->get();
     }
 
