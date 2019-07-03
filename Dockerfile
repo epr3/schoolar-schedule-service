@@ -17,6 +17,6 @@ WORKDIR /var/www/html
 
 ADD . .
 
-RUN php artisan migrate
+# RUN php artisan migrate
 
 EXPOSE 3000

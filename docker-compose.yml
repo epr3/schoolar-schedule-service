@@ -6,7 +6,7 @@ services:
     build:
       dockerfile: Dockerfile
       context: .
-    command: "/usr/bin/supervisord"
+    command: "./init.sh"
     volumes:
       - .:/var/www/html
     ports:
